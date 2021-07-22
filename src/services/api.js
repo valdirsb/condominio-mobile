@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const baseUrl = 'https://api.b7web.com.br/devcond/api';
+const baseUrl = 'http://vscond.vasan.com.br/api';
 
 const request = async (method, endpoint, params, token = null) => {
     method = method.toLowerCase();
@@ -92,9 +92,9 @@ export default {
         let token = await AsyncStorage.getItem('token');
         let formData = new FormData();
         formData.append('photo', {
-            uri: file.uri,
-            type: file.type,
-            name: file.fileName
+            uri: file.assets[0].uri,
+            type: file.assets[0].type,
+            name: file.assets[0].fileName,
         });
         let req = await fetch(`${baseUrl}/warning/file`, {
             method: 'POST',
